@@ -16,7 +16,11 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from openai import APIError, AuthenticationError, BadRequestError, OpenAI, PermissionDeniedError, RateLimitError
 from pydantic import BaseModel, Field
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except ImportError:  # pragma: no cover
+    def load_dotenv(*_args: Any, **_kwargs: Any) -> bool:
+        return False
 
 
 APP_DIR = Path(__file__).resolve().parent
