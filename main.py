@@ -25,8 +25,6 @@ except ImportError:  # pragma: no cover
 
 APP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = APP_DIR / "static"
-DATA_DIR = APP_DIR / "data"
-DB_PATH = DATA_DIR / "agent.db"
 WORKSPACE_ROOT = APP_DIR
 load_dotenv(APP_DIR / ".env")
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
@@ -34,6 +32,14 @@ MAX_FILE_BYTES = 64_000
 MAX_COMMAND_OUTPUT = 12_000
 MAX_TOOL_ROUNDS = 8
 ENABLE_LOCAL_FALLBACK = os.getenv("ENABLE_LOCAL_FALLBACK", "1") == "1"
+
+
+def running_on_vercel() -> bool:
+    return os.getenv("VERCEL") == "1"
+
+
+DATA_DIR = Path("/tmp/atlas-agent-data") if running_on_vercel() else APP_DIR / "data"
+DB_PATH = DATA_DIR / "agent.db"
 
 
 SYSTEM_PROMPT = """You are Atlas, a capable general-purpose AI workspace agent.

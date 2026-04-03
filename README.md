@@ -98,7 +98,7 @@ Then open `http://127.0.0.1:8000`.
 
 ## Notes
 
-- Session and memory data are stored in `data/agent.db`.
+- Session and memory data are stored in `data/agent.db` locally, and in `/tmp/atlas-agent-data/agent.db` on Vercel serverless runtime.
 - The backend only allows workspace paths that stay inside this project directory.
 - Shell commands are intentionally restricted and block destructive commands.
 - The app auto-loads variables from `.env`.
