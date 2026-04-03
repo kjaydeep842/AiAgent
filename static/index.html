@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atlas Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="bg-grid"></div>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="brand">
+            <div class="brand-mark">A</div>
+            <div>
+              <h1>Atlas Agent</h1>
+              <p>Modern workspace operator</p>
+            </div>
+          </div>
+          <div class="brand-note">
+            <span class="pill">Latest UI</span>
+            <p>Modern control surface for prompts, code generation, workspace tools, and fast iteration.</p>
+          </div>
+          <button id="newSessionButton" class="primary-button full-width">New Session</button>
+        </div>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Sessions</h2>
+            <span id="sessionCount" class="pill">0</span>
+          </div>
+          <div id="sessionList" class="session-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Memory</h2>
+            <span class="pill">Persistent</span>
+          </div>
+          <form id="memoryForm" class="stack">
+            <textarea id="memoryInput" rows="3" placeholder="Save a reusable instruction or project fact"></textarea>
+            <button class="secondary-button" type="submit">Save Memory</button>
+          </form>
+          <div id="memoryList" class="memory-list"></div>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="hero-copy">
+            <p class="eyebrow">Agent Console</p>
+            <h2 id="sessionTitle">New Session</h2>
+            <p class="hero-subtitle">Build faster with a brighter command center designed for chat, coding, memory, and live tool flow.</p>
+          </div>
+          <div class="settings">
+            <label>
+              <span>Model</span>
+              <select id="modelSelect">
+                <option value="local-demo">local-demo</option>
+                <option value="openrouter/free">openrouter/free</option>
+                <option value="qwen/qwen3-coder:free">qwen/qwen3-coder:free</option>
+                <option value="gpt-5.4-mini">gpt-5.4-mini</option>
+                <option value="gpt-5.4">gpt-5.4</option>
+              </select>
+            </label>
+            <label class="workspace-field">
+              <span>Workspace</span>
+              <input id="workspaceInput" type="text" placeholder="." />
+            </label>
+          </div>
+        </header>
+
+        <section id="setupBanner" class="setup-banner hidden"></section>
+
+        <section class="overview-strip">
+          <article class="overview-card">
+            <span class="overview-label">Experience</span>
+            <strong>Animated shell</strong>
+          </article>
+          <article class="overview-card">
+            <span class="overview-label">Workflow</span>
+            <strong>Code and chat</strong>
+          </article>
+          <article class="overview-card">
+            <span class="overview-label">State</span>
+            <strong>Persistent memory</strong>
+          </article>
+        </section>
+
+        <section id="messages" class="messages"></section>
+
+        <section class="composer-wrap">
+          <form id="chatForm" class="composer">
+            <textarea id="promptInput" rows="4" placeholder="Ask Atlas to code, write, analyze, search files, or run safe commands"></textarea>
+            <div class="composer-actions">
+              <div id="statusText" class="status">Ready</div>
+              <button id="sendButton" class="primary-button" type="submit">Send</button>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <aside class="activity">
+        <section class="panel fill">
+          <div class="panel-header">
+            <h2>Code Preview</h2>
+            <span class="pill">Live</span>
+          </div>
+          <div id="previewPanel" class="preview-panel empty-state">No code preview yet.</div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Tool Activity</h2>
+            <span class="pill">Trace</span>
+          </div>
+          <div id="toolLog" class="tool-log empty-state">No tool calls yet.</div>
+        </section>
+      </aside>
+    </div>
+
+    <template id="messageTemplate">
+      <article class="message">
+        <div class="message-role"></div>
+        <div class="message-body"></div>
+      </article>
+    </template>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
